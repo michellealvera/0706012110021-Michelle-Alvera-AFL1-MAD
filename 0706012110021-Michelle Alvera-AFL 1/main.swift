@@ -34,23 +34,48 @@ print("\n\n... or choose where you want to go")
 print("\n\n[F]orest of Troll 🧌\n[M]ountain of Golem🗿\n[Q]uit game")
 print("\n\nYour choice? ")
 journeyInput = readLine()!
+journeyInput = journeyInput.lowercased()
+repeat {
+    switch journeyInput {
+    case "c":
+        print("Go to player stats screen")
+    case "h":
+        print("Go to heal wound screen")
+    case "f":
+        print("Go to forest of troll")
+    case "m":
+        print("Go to mountain of golem")
+    case "q":
+        print("Thank you for playing, see you soon young wizard!")
+    default:
+        print("Try again mate")
+    }
+} while journeyInput != "q" || journeyInput != "c" || journeyInput != "h" || journeyInput != "f" || journeyInput != "m"
 
 //Player stats screen
 var statsReturn: String = ""
 
-print("Player name: \(userName)")
-print("\n\nHP: \(hp)/100\nMP: \(mp)/50")
-print("\n\nMagic:\n- Physical Attack. No mana required. Deal 5pt of damage.\n- Meteor. Use 15pt of MP. Deal 50pt of damage.\n- Shield. Use 10pt of MP. Block enemy's attack for 1 turn.")
-print("\n\nItems:\n- Potion x\(potion). Heal 20pt of your HP.\n- Elixir x\(elixir). Add 10pt to your MP.")
-print("\n\nPress [return] to go back: ")
-statsReturn = readLine()!
+repeat {
+    print("Player name: \(userName)")
+    print("\n\nHP: \(hp)/100\nMP: \(mp)/50")
+    print("\n\nMagic:\n- Physical Attack. No mana required. Deal 5pt of damage.\n- Meteor. Use 15pt of MP. Deal 50pt of damage.\n- Shield. Use 10pt of MP. Block enemy's attack for 1 turn.")
+    print("\n\nItems:\n- Potion x\(potion). Heal 20pt of your HP.\n- Elixir x\(elixir). Add 10pt to your MP.")
+    print("\n\nPress [return] to go back: ")
+    statsReturn = readLine()!
+    if statsReturn == "return" {
+        print("Going back to journey screen")
+    } else {
+        print("loop")
+    }
+} while statsReturn != "return"
 
 //Heal wound screen
 print("Your HP is \(hp).\nYou have \(potion) Potion(s).")
 print("\n\nAre you sure to use 1 potion to heal your wound? [Y/N] ")
 var healWound: String = readLine()!
-while healWound != "y" || healWound != "n"{
-    switch healWound.lowercased() {
+healWound = healWound.lowercased()
+repeat {
+    switch healWound {
     case "y":
         hp += 20
         potion -= 1
@@ -64,7 +89,7 @@ while healWound != "y" || healWound != "n"{
         print("loop")
         //loop
     }
-}
+} while healWound != "y" || healWound != "n"
 
 //forest of troll screen
 var fotChoice: String = ""
@@ -74,6 +99,13 @@ print("\n\n🧌Name: Troll x1\n🧌Health: \(tHP)")
 print("\n\nChoose your action:\n[1] Physical Attack. No mana required. Deal 5pt of damage.\n[2] Meteor. use 15pt of MP. Deal 50pt of damage.\n[3] Shield. Use 10pt of MP. Block enemy’s attack in 1 turn.\n\n[4] Use Potion to heal wound.\n[5] Scan enemy’s vital.\n[6] Flee from battle.")
 print("Your choice? ")
 fotChoice = readLine()!
+fotChoice = fotChoice.lowercased()
+            
+repeat {
+    switch fotChoice {
+        
+    }
+}
 
 //mountain of golem
 var mogChoice: String = ""
