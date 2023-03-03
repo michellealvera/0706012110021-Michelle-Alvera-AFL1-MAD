@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04622EE329B1847C00A07CCC /* welcoming_screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04622EE229B1847C00A07CCC /* welcoming_screen.swift */; };
 		049FA9F929AD9E22001458FD /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FA9F829AD9E22001458FD /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04622EE229B1847C00A07CCC /* welcoming_screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = welcoming_screen.swift; sourceTree = "<group>"; };
 		049FA9F529AD9E22001458FD /* 0706012110021-Michelle Alvera-AFL 1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "0706012110021-Michelle Alvera-AFL 1"; sourceTree = BUILT_PRODUCTS_DIR; };
 		049FA9F829AD9E22001458FD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -45,6 +47,7 @@
 				049FA9F629AD9E22001458FD /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		049FA9F629AD9E22001458FD /* Products */ = {
 			isa = PBXGroup;
@@ -58,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				049FA9F829AD9E22001458FD /* main.swift */,
+				04622EE229B1847C00A07CCC /* welcoming_screen.swift */,
 			);
 			path = "0706012110021-Michelle Alvera-AFL 1";
 			sourceTree = "<group>";
@@ -121,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				049FA9F929AD9E22001458FD /* main.swift in Sources */,
+				04622EE329B1847C00A07CCC /* welcoming_screen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
