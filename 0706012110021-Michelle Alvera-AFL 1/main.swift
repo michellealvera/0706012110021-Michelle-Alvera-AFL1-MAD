@@ -10,6 +10,7 @@ import Foundation
 var userInput: String = ""
 var playAgain: String = ""
 
+//to check if player win, lose, or draw when player, enemy, or both has 0 HP
 func winState(monstersHP: inout Int){
     repeat{
         if (userStat["hp"]! > 0 && monstersHP == 0){
@@ -158,8 +159,10 @@ journeyInput = journeyInput.lowercased()
                 }
             } while gHP > 0 || mogChoice != "q" || userStat["hp"]! > 0 || playAgain != "y" || playAgain == "n"
     case "q":
+        //quit game
         quitGame()
     default:
+        //if user inputs other than "c", "h", "f", "m", "q"
         print("Try again mate")
     }
 } while journeyInput != "q" || playAgain == "y" || playAgain == "n"
