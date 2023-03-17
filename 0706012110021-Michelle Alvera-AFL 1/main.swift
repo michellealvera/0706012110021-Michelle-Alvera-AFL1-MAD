@@ -7,10 +7,56 @@
 
 import Foundation
 //Opening screen
-print("Welcome to the world of magic! 🧙‍♂️🧌")
-print("\n\nYou have been chosen to embark on an epic journey as a young wizard on the math of becoming master of the arcane arts. Your adventures will take you through forests 🌲, mountains ⛰️, and dungeons 🏰, where you will face challenges, make allies, and fight enemies.")
-print("\n\nPress [return] to continue: ")
-let userInput = String(readLine()!)
+var userInput: String = ""
+var playAgain: String = ""
+
+func winState(monstersHP: inout Int){
+    repeat{
+        if (userStat["hp"]! > 0 && monstersHP == 0){
+            print("Congratulations, \(userName). You defeated the enemy.")
+        } else if (userStat["hp"]! == 0 && monstersHP > 0){
+            print("The enemy defeated you. You Lose!")
+            print("Play again? [Y/N] ")
+            playAgain = readLine()!
+            playAgain = playAgain.lowercased()
+            
+            if (playAgain == "y") {
+                print("\nYou just got another chance!")
+            } else if (playAgain == "n"){
+                print("Thanks for playing. Toodles!")
+                exit(0)
+            } else {
+                print("Please input [Y/N]")
+            }
+        } else if (userStat["hp"] == 0 && monstersHP == 0){
+            print("\nDraw!")
+            print("Play again? [Y/N] ")
+            playAgain = readLine()!
+            playAgain = playAgain.lowercased()
+            
+            if (playAgain == "y") {
+                print("\nYou just got another chance!")
+            } else if (playAgain == "n"){
+                print("Thanks for playing. Toodles!")
+                exit(0)
+            } else {
+                print("Please input [Y/N]")
+            }
+        } else {
+            break
+        }
+    } while playAgain != "y" || playAgain != "n"
+}
+
+repeat{
+    print("Welcome to the world of magic! 🧙‍♂️🧌")
+    print("\n\nYou have been chosen to embark on an epic journey as a young wizard on the math of becoming master of the arcane arts. Your adventures will take you through forests 🌲, mountains ⛰️, and dungeons 🏰, where you will face challenges, make allies, and fight enemies.")
+    print("\n\nPress [return] to continue: ")
+    userInput = readLine()!
+    if (userInput == "") {
+        break
+    }
+} while userInput != ""
 //
 //print("User input: \(userInput)")
 //let menuCount = menuList.count + 1
@@ -33,10 +79,9 @@ print("Nice to meet you \(userName)!")
 
 //Journey screen
 var journeyInput: String = ""
-var userStat: [String:Int] = ["hp":100, "mp":50, "potion":10, "elixir":5]
 
 repeat {
-print("From here, you can ...")
+print("\nFrom here, you can ...")
 print("\n\n[C]heck your health and stats \n[H]eal your wounds with potion")
 print("\n\n... or choose where you want to go")
 print("\n\n[F]orest of Troll 🧌\n[M]ountain of Golem🗿\n[Q]uit game")
@@ -46,40 +91,10 @@ journeyInput = journeyInput.lowercased()
     switch journeyInput {
     case "c":
         //Player stats screen
-        var statsReturn: String = ""
-        repeat {
-            print("Player name: \(userName)")
-            print("\n\nHP: \(userStat["hp"])/100\nMP: \(userStat["mp"])/50")
-            print("\n\nMagic:\n- Physical Attack. No mana required. Deal 5pt of damage.\n- Meteor. Use 15pt of MP. Deal 50pt of damage.\n- Shield. Use 10pt of MP. Block enemy's attack for 1 turn.")
-            print("\n\nItems:\n- Potion x\(userStat["potion"]). Heal 20pt of your HP.\n- Elixir x\(userStat["elixir"]). Add 10pt to your MP.")
-            print("\n\nPress [return] to go back: ")
-            statsReturn = readLine()!
-            if statsReturn == "return" {
-                print("Going back to journey screen")
-            } else {
-                print("loop")
-            }
-        } while statsReturn != "return"
+        checkStat(playerName: userName)
     case "h":
         //Heal wound screen
-        var healWound: String = ""
-        repeat {
-            print("Your HP is \(userStat["hp"]).\nYou have \(userStat["potion"]) Potion(s).")
-            print("\n\nAre you sure to use 1 potion to heal your wound? [Y/N] ")
-            healWound = readLine()!
-            healWound = healWound.lowercased()
-            switch healWound {
-            case "y":
-                userStat["hp"]! += 20
-                userStat["potion"]! -= 1
-                print("\n\nYour HP is now: \(userStat["hp"])\nYou have \(userStat["potion"]) potion(s) left.")
-                print("nStill want to use 1 potion to heal wound again? [Y/N] ")
-                healWound = readLine()!
-            default:
-                print("Please input [Y/N]\n")
-                //loop
-            }
-        } while healWound != "y" || healWound != "n"
+        healWound()
     case "f":
         //forest of troll screen
         var fotChoice: String = ""
@@ -87,71 +102,64 @@ journeyInput = journeyInput.lowercased()
         repeat {
             print("As you enter the forest, you feel a sense of unease wash over you.\nSuddenly, you hear the sound of twigs snapping behind you. You quickly spin around, and find a Troll🧌 emerging from the shadows.")
             print("\n\n🧌Name: Troll x1\n🧌Health: \(tHP)")
-            print("\n\nChoose your action:\n[1] Physical Attack. No mana required. Deal 5pt of damage.\n[2] Meteor. use 15pt of MP. Deal 50pt of damage.\n[3] Shield. Use 10pt of MP. Block enemy’s attack in 1 turn.\n\n[4] Use Potion to heal wound.\n[5] Scan enemy’s vital.\n[6] Flee from battle.")
-            print("Your choice? ")
+            action()
             fotChoice = readLine()!
             fotChoice = fotChoice.lowercased()
             
             switch fotChoice {
             case "1":
-                print("Physical Attack")
+                physicalAttack(monsterHP: &tHP)
             case "2":
-                print("Meteor")
+                meteor(monsterHP: &tHP)
             case "3":
-                print("Shield")
+                shield()
+            case "4":
+                healWound()
+            case "5":
+                print("\nTroll's Health: \(tHP)")
+            case "6":
+                flee()
+            case "q":
+                quitGame()
             default:
                 print("Please choose between 1 to 6")
             }
-        } while fotChoice != "1" || fotChoice != "2" || fotChoice != "3" || fotChoice != "4" || fotChoice
-        != "5" || fotChoice != "6"
+        } while tHP > 0 || fotChoice != "q" || userStat["hp"]! > 0 || playAgain == "y" || playAgain == "n"
         
     case "m":
         //mountain of golem
         var mogChoice: String = ""
         var gHP = 1000
+        print("As you make your way through the rugged mountain terrain ⛰️, you can feel the chill of wind biting at your skin. Suddenly, you hear a sound that makes you freeze in your tracks. That’s when you see it - a massive, snarling Golem🗿 emerging from the shadows.")
         repeat{
-            print("As you make your way through the rugged mountain terrain ⛰️, you can feel the chill of wind biting at your skin. Suddenly, you hear a sound that makes you freeze in your tracks. That’s when you see it - a massive, snarling Golem🗿 emerging from the shadows.")
             print("\n\n🗿Name: Golem x1\n🗿Health: \(gHP)")
-            print("\n\nChoose your action:\n[1] Physical Attack. No mana required. Deal 5pt of damage.\n[2] Meteor. use 15pt of MP. Deal 50pt of damage.\n[3] Shield. Use 10pt of MP. Block enemy’s attack in 1 turn.\n\n[4] Use Potion to heal wound.\n[5] Scan enemy’s vital.\n[6] Flee from battle.")
-            print("Your choice? ")
+            action()
             mogChoice = readLine()!
             
             var mogChoice: String = ""
-            var gHP = 1000
-            repeat {
-                print("As you enter the forest, you feel a sense of unease wash over you.\nSuddenly, you hear the sound of twigs snapping behind you. You quickly spin around, and find a Troll🧌 emerging from the shadows.")
-                print("\n\n🧌Name: Troll x1\n🧌Health: \(gHP)")
-                print("\n\nChoose your action:\n[1] Physical Attack. No mana required. Deal 5pt of damage.\n[2] Meteor. use 15pt of MP. Deal 50pt of damage.\n[3] Shield. Use 10pt of MP. Block enemy’s attack in 1 turn.\n\n[4] Use Potion to heal wound.\n[5] Scan enemy’s vital.\n[6] Flee from battle.")
-                print("Your choice? ")
-                mogChoice = readLine()!
-                mogChoice = mogChoice.lowercased()
-                
+            mogChoice = mogChoice.lowercased()
                 switch mogChoice {
                 case "1":
-                    print("Physical Attack")
+                    physicalAttack(monsterHP: &gHP)
                 case "2":
-                    print("Meteor")
+                    meteor(monsterHP: &gHP)
                 case "3":
-                    print("Shield")
+                    shield()
                 case "4":
-                    print("Potion")
+                    healWound()
                 case "5":
-                    print("Scan")
+                    print("\nGolem's Health: \(gHP)")
                 case "6":
-                    //flee from battle
-                    var fleeReturn: String = ""
-                    print("You feel that if you don’t escape soon, you won’t be able to continue the fight.\nYou look around frantically, searching for a way out. You sprint towards the exit, your heart pounding in your chest.\n\nYou’re safe for now.")
-                    print("\n\nPress [return] to go back: ")
-                    fleeReturn = readLine()!
+                    flee()
+                case "q":
+                    quitGame()
                 default:
-                    print("loop")
+                    print("Please choose between 1 to 6")
                 }
-            } while mogChoice != "1" || mogChoice != "2" || mogChoice != "3" || mogChoice != "4" || mogChoice
-            != "5" || mogChoice != "6"
-        } while mogChoice != "6"
+            } while gHP > 0 || mogChoice != "q" || userStat["hp"]! > 0 || playAgain != "y" || playAgain == "n"
     case "q":
-        print("Thank you for playing, see you soon young wizard!")
+        quitGame()
     default:
         print("Try again mate")
     }
-} while journeyInput != "q" || journeyInput != "c" || journeyInput != "h" || journeyInput != "f" || journeyInput != "m"
+} while journeyInput != "q" || playAgain == "y" || playAgain == "n"
