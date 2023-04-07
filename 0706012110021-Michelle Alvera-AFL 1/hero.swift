@@ -67,8 +67,15 @@ class Hero {
             switch healWound {
             case "p":
                 if (potion>0){
-                    hp += 20
-                    potion -= 1
+                    if (hp < 100){
+                        hp += 20
+                        potion -= 1
+                        if (hp > 100) {
+                            hp = 100
+                        }
+                    } else if (hp == 100) {
+                        print("Your HP is still full")
+                    }
                 } else {
                     print("\nYou ran out of potions!")
                 }
