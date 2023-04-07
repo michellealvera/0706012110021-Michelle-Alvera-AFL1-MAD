@@ -9,13 +9,19 @@ import Foundation
 //Opening screen
 var userInput: String = ""
 var playAgain: String = ""
+let golem = Monster(mName: "Golem 🗿", maxAttack: 15)
+let troll = Monster(mName: "Troll 🧌", maxAttack: 10)
+let mog = Journey(name: "Mountain of Golem", description: "As you make your way through the rugged mountain terrain ⛰️, you can feel the chill of wind biting at your skin. Suddenly, you hear a sound that makes you freeze in your tracks. That’s when you see it - a massive, snarling Golem🗿 emerging from the shadows.")
+
+let fot = Journey(name: "Forest of Troll", description: "As you enter the forest, you feel a sense of unease wash over you.\nSuddenly, you hear the sound of twigs snapping behind you. You quickly spin around, and find a Troll🧌 emerging from the shadows.")
+
 
 //to check if player win, lose, or draw when player, enemy, or both has 0 HP
 func winState(monstersHP: inout Int){
     repeat{
-        if (userStat["hp"]! > 0 && monstersHP == 0){
+        if (player.hp > 0 && monstersHP == 0){
             print("Congratulations, \(userName). You defeated the enemy.")
-        } else if (userStat["hp"]! == 0 && monstersHP > 0){
+        } else if (player.hp == 0 && monstersHP > 0){
             print("The enemy defeated you. You Lose!")
             print("Play again? [Y/N] ")
             playAgain = readLine()!
@@ -29,7 +35,7 @@ func winState(monstersHP: inout Int){
             } else {
                 print("Please input [Y/N]")
             }
-        } else if (userStat["hp"] == 0 && monstersHP == 0){
+        } else if (player.hp == 0 && monstersHP == 0){
             print("\nDraw!")
             print("Play again? [Y/N] ")
             playAgain = readLine()!
@@ -75,6 +81,7 @@ repeat{
 //Welcoming screen
 print("May I know your name, a young wizard? ")
 let userName = (readLine()!)
+var player = Hero(userName: userName)
 
 print("Nice to meet you \(userName)!")
 
@@ -92,48 +99,56 @@ journeyInput = journeyInput.lowercased()
     switch journeyInput {
     case "c":
         //Player stats screen
-        checkStat(playerName: userName)
+        player.checkStat()
     case "h":
         //Heal wound screen
-        healWound()
+        player.healWound()
     case "f":
         //forest of troll screen
         var fotChoice: String = ""
-        var tHP = 1000
         repeat {
-            print("As you enter the forest, you feel a sense of unease wash over you.\nSuddenly, you hear the sound of twigs snapping behind you. You quickly spin around, and find a Troll🧌 emerging from the shadows.")
-            print("\n\n🧌Name: Troll x1\n🧌Health: \(tHP)")
+            print(fot.description)
+            troll.enemyStat()
             action()
             fotChoice = readLine()!
             fotChoice = fotChoice.lowercased()
             
             switch fotChoice {
             case "1":
-                physicalAttack(monsterHP: &tHP)
+                fot.physicalAttack()
+                troll.decreaseHP(damage: 5)
+                troll.mDamage()
+                winState(monstersHP: &troll.mHP)
             case "2":
-                meteor(monsterHP: &tHP)
+                fot.meteor(mp: player.mp)
+                player.mp -= 15
+                troll.decreaseHP(damage: 50)
+                troll.mDamage()
+                winState(monstersHP: &troll.mHP)
             case "3":
-                shield()
+                fot.shield(mp: player.mp)
+                player.mp -= 10
+                winState(monstersHP: &troll.mHP)
             case "4":
-                healWound()
+                player.healWound()
+                winState(monstersHP: &troll.mHP)
             case "5":
-                print("\nTroll's Health: \(tHP)")
+                troll.enemyStat()
             case "6":
-                flee()
+                fot.flee()
             case "q":
-                quitGame()
+                player.quitGame()
             default:
                 print("Please choose between 1 to 6")
             }
-        } while tHP > 0 || fotChoice != "q" || userStat["hp"]! > 0 || playAgain == "y" || playAgain == "n"
+        } while troll.mHP > 0 || fotChoice != "q" || player.hp > 0 || playAgain == "y" || playAgain == "n"
         
     case "m":
         //mountain of golem
         var mogChoice: String = ""
-        var gHP = 1000
-        print("As you make your way through the rugged mountain terrain ⛰️, you can feel the chill of wind biting at your skin. Suddenly, you hear a sound that makes you freeze in your tracks. That’s when you see it - a massive, snarling Golem🗿 emerging from the shadows.")
+        print(mog.description)
         repeat{
-            print("\n\n🗿Name: Golem x1\n🗿Health: \(gHP)")
+            golem.enemyStat()
             action()
             mogChoice = readLine()!
             
@@ -141,26 +156,34 @@ journeyInput = journeyInput.lowercased()
             mogChoice = mogChoice.lowercased()
                 switch mogChoice {
                 case "1":
-                    physicalAttack(monsterHP: &gHP)
+                    mog.physicalAttack()
+                    golem.decreaseHP(damage: 5)
+                    golem.mDamage()
+                    winState(monstersHP: &golem.mHP)
                 case "2":
-                    meteor(monsterHP: &gHP)
+                    mog.meteor(mp: player.mp)
+                    player.mp -= 15
+                    golem.decreaseHP(damage: 50)
+                    golem.mDamage()
+                    winState(monstersHP: &golem.mHP)
                 case "3":
-                    shield()
+                    mog.shield(mp: player.mp)
+                    player.mp -= 10
                 case "4":
-                    healWound()
+                    player.healWound()
                 case "5":
-                    print("\nGolem's Health: \(gHP)")
+                    golem.enemyStat()
                 case "6":
-                    flee()
+                    mog.flee()
                 case "q":
-                    quitGame()
+                    player.quitGame()
                 default:
                     print("Please choose between 1 to 6")
                 }
-            } while gHP > 0 || mogChoice != "q" || userStat["hp"]! > 0 || playAgain != "y" || playAgain == "n"
+        } while golem.mHP > 0 || mogChoice != "q" || player.hp > 0 || playAgain != "y" || playAgain == "n"
     case "q":
         //quit game
-        quitGame()
+        player.quitGame()
     default:
         //if user inputs other than "c", "h", "f", "m", "q"
         print("Try again mate")

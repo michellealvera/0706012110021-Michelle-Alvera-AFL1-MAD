@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0456243E29DF8A5100B4697F /* monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456243D29DF8A5100B4697F /* monster.swift */; };
+		0456244029DF8DFF00B4697F /* hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456243F29DF8DFF00B4697F /* hero.swift */; };
+		0456244229DF907800B4697F /* journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456244129DF907800B4697F /* journey.swift */; };
+		0456244429DFC16C00B4697F /* equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456244329DFC16C00B4697F /* equipment.swift */; };
 		04622EE329B1847C00A07CCC /* welcoming_screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04622EE229B1847C00A07CCC /* welcoming_screen.swift */; };
 		049FA9F929AD9E22001458FD /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FA9F829AD9E22001458FD /* main.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +28,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0456243D29DF8A5100B4697F /* monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = monster.swift; sourceTree = "<group>"; };
+		0456243F29DF8DFF00B4697F /* hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hero.swift; sourceTree = "<group>"; };
+		0456244129DF907800B4697F /* journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = journey.swift; sourceTree = "<group>"; };
+		0456244329DFC16C00B4697F /* equipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = equipment.swift; sourceTree = "<group>"; };
 		04622EE229B1847C00A07CCC /* welcoming_screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = welcoming_screen.swift; sourceTree = "<group>"; };
 		049FA9F529AD9E22001458FD /* 0706012110021-Michelle Alvera-AFL 1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "0706012110021-Michelle Alvera-AFL 1"; sourceTree = BUILT_PRODUCTS_DIR; };
 		049FA9F829AD9E22001458FD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -62,6 +70,10 @@
 			children = (
 				049FA9F829AD9E22001458FD /* main.swift */,
 				04622EE229B1847C00A07CCC /* welcoming_screen.swift */,
+				0456243D29DF8A5100B4697F /* monster.swift */,
+				0456243F29DF8DFF00B4697F /* hero.swift */,
+				0456244129DF907800B4697F /* journey.swift */,
+				0456244329DFC16C00B4697F /* equipment.swift */,
 			);
 			path = "0706012110021-Michelle Alvera-AFL 1";
 			sourceTree = "<group>";
@@ -124,8 +136,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0456243E29DF8A5100B4697F /* monster.swift in Sources */,
+				0456244229DF907800B4697F /* journey.swift in Sources */,
+				0456244429DFC16C00B4697F /* equipment.swift in Sources */,
 				049FA9F929AD9E22001458FD /* main.swift in Sources */,
 				04622EE329B1847C00A07CCC /* welcoming_screen.swift in Sources */,
+				0456244029DF8DFF00B4697F /* hero.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
